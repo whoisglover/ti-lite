@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useEffect, useState } from 'react'
 import './App.css'
+import { useAppDispatch, useAppSelector } from './hooks'
+import { selectCurrentStation, fetchStations } from './store/stations/stationsSlice'
+import StationList from './components/StationList'
+import AudioPlayer from './components/AudioPlayer'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+
+  
+  const stationState = useAppSelector((state) => state.stations)
+  const currentStation = useAppSelector(selectCurrentStation)
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchStations())
+  }, [dispatch])
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className="App">
+      {stationState.status === 'failed' && <div>Failed to load stations. Error: {stationState.error}</div>}
+      {stationState.status === 'loading' && <div>Loading stations...</div>}
+      {stationState.status === 'succeeded' && (
+        <>
+        <div className="play-bar">
+          {currentStation ? (
+            <>
+            <p>Now Playing: {currentStation.name}</p>
+            </>
+          ) : (
+            <p>No Station Selected</p>            
+          )}
+        </div>
+        <StationList/>
+        {currentStation && (
+          <AudioPlayer streamUrl={currentStation.streamUrl} autoPlay={true} />
+        )}
+        </>
+      )}
+    </div>
   )
-}
+};
 
 export default App
