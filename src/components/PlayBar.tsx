@@ -1,4 +1,3 @@
-import React, {useState} from "react"
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { selectAudioError, selectCurrentStation, selectAutoPlay, setAutoPlay } from "../store/stations/stationsSlice"
 import AudioPlayer from "./AudioPlayer"
