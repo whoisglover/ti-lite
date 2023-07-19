@@ -1,6 +1,6 @@
 import {useRef, useEffect} from "react";
 import { useAppDispatch } from "../hooks";
-import { setAudioError } from "../store/stations/stationsSlice";
+import { setAudioError, setAutoPlay } from "../store/stations/stationsSlice";
 
 interface AudioPlayerProps {
     streamUrl: string;
@@ -16,9 +16,15 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({streamUrl, autoPlay}) => {
             audioRef.current.src = streamUrl;
             if(autoPlay){
                 audioRef.current.play().catch(error => {
-                    console.log('error: ', error)
-                    // alert('Radio Stream is down')
-                    dispatch(setAudioError(error.message));
+                    console.log('error: ', error.message)
+                    //re rendering seems to duplicate the play request, need to check if this is dev environment only (react double render issue)
+                    if(error.message == 'The play() request was interrupted by a new load request. https://goo.gl/LdLk22'){
+                        console.log('already about to play')
+                    } else {
+                        // alert('Radio Stream is down')
+                        dispatch(setAutoPlay(false));
+                        dispatch(setAudioError(error.message));
+                    }
                 });
             } else {
                 audioRef.current.pause();
