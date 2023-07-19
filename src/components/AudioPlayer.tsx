@@ -1,4 +1,4 @@
-import React, {useRef, useEffect, useState} from "react";
+import {useRef, useEffect, useState} from "react";
 import { useAppDispatch } from "../hooks";
 import { setAudioError } from "../store/stations/stationsSlice";
 

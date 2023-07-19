@@ -1,8 +1,8 @@
-import { Station } from '../types/station';
+import { Station as StationType } from '../types/station';
 
 const API_URL: string = 'https://s3-us-west-1.amazonaws.com/cdn-web.tunein.com/stations.json';
 
-export const fetchStations = async (): Promise<Station[]> => {
+export const fetchStations = async (): Promise<StationType[]> => {
     try {
         const response = await fetch(API_URL);
         const responseBody = await response.json();

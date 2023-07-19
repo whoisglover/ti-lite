@@ -1,4 +1,3 @@
-import React from "react";
 import {Station as StationType} from "../types/station";
 
 interface StationProps {
