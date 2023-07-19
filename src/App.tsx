@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect} from 'react'
 import './App.css'
 import { useAppDispatch, useAppSelector } from './hooks'
 import { selectCurrentStation, fetchStations } from './store/stations/stationsSlice'
 import StationList from './components/StationList'
-import AudioPlayer from './components/AudioPlayer'
+import PlayBar from './components/PlayBar'
 
 const App: React.FC = () => {
 
@@ -32,9 +32,7 @@ const App: React.FC = () => {
           )}
         </div>
         <StationList/>
-        {currentStation && (
-          <AudioPlayer streamUrl={currentStation.streamUrl} autoPlay={true} />
-        )}
+        <PlayBar/>
         </>
       )}
     </div>

@@ -7,6 +7,8 @@ import { fetchStations as fetchStationsAPI } from "../../services/api";
 interface StationsState {
     stations: Station[];
     currentStation: Station | null;
+    audioError: string | null;
+    autoPlay: boolean;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     error: string | null;
 }
@@ -14,6 +16,8 @@ interface StationsState {
 const initialState: StationsState = {
     stations: [],
     currentStation: null,
+    audioError: null,
+    autoPlay: false,
     status: 'idle',
     error: null,
 };
@@ -32,6 +36,15 @@ export const stationsSlice = createSlice({
         },
         setCurrentStation: (state, action: PayloadAction<Station | null> ) => {
             state.currentStation = action.payload;
+            if(action.payload) {
+                state.autoPlay = true;
+            }
+        },
+        setAudioError: (state, action: PayloadAction<string | null>) => {
+            state.audioError = action.payload;
+        },
+        setAutoPlay: (state, action: PayloadAction<boolean>) => {
+            state.autoPlay = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -50,9 +63,11 @@ export const stationsSlice = createSlice({
     }
 });
 
-export const {setStations, setCurrentStation} = stationsSlice.actions;
+export const {setStations, setCurrentStation, setAudioError, setAutoPlay} = stationsSlice.actions;
 
 export const selectStations = (state: RootState) => state.stations.stations;
 export const selectCurrentStation = (state: RootState) => state.stations.currentStation;
+export const selectAudioError = (state: RootState) => state.stations.audioError;
+export const selectAutoPlay = (state: RootState) => state.stations.autoPlay;
 
 export default stationsSlice.reducer;
