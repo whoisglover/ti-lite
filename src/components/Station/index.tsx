@@ -1,6 +1,6 @@
 import React from "react";
-import {Station as StationType} from "../types/station";
-import styles from '../styles/Station.module.css'
+import {Station as StationType} from "../../types/station";
+import styles from './Station.module.css'
 
 interface StationProps {
     station: StationType;

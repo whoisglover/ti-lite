@@ -1,7 +1,7 @@
-import { useAppDispatch, useAppSelector } from "../hooks"
-import { selectAudioError, selectCurrentStation, selectAutoPlay, setAutoPlay } from "../store/stations/stationsSlice"
-import AudioPlayer from "./AudioPlayer"
-import styles from '../styles/PlayBar.module.css'
+import { useAppDispatch, useAppSelector } from "../../hooks"
+import { selectAudioError, selectCurrentStation, selectAutoPlay, setAutoPlay } from "../../store/stations/stationsSlice"
+import AudioPlayer from "../AudioPlayer"
+import styles from './PlayBar.module.css'
 
 
 const PlayBar: React.FC = () => {
@@ -15,7 +15,7 @@ const PlayBar: React.FC = () => {
     };
 
     return (
-        <div className={styles.playBarContainer}>
+        <div className={styles.playBarContainer} data-testid="playBar">
         <div className={styles.stationInfo}>
             {audioError 
                 ? (
