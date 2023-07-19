@@ -1,6 +1,5 @@
 import { useState, useMemo } from "react";
 import Station from "./Station";
-import StationDetails from "./StationDetails";
 import { Station as StationType } from "../types/station";
 import { selectCurrentStation, selectStations, setCurrentStation } from "../store/stations/stationsSlice";
 import {useAppSelector, useAppDispatch} from "../hooks";
