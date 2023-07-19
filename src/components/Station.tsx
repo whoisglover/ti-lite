@@ -1,5 +1,6 @@
 import React from "react";
 import {Station as StationType} from "../types/station";
+import styles from '../styles/Station.module.css'
 
 interface StationProps {
     station: StationType;
@@ -17,13 +18,9 @@ const Station: React.FC<StationProps> = ({station, currentStation, setCurrentSta
     };
 
     return (
-        <div
-         style={{backgroundColor: currentStation?.id === station.id ? 'lighblue' : 'white'}}
-         onClick={handleClick}
-         >
-            <h2>{station.name}</h2>
-            <img src={station.imgUrl} alt={station.name} />
-            <p>{station.description}</p>
+        <div className={styles.stationTile} onClick={handleClick}>
+        <img className={styles.stationImage} src={station.imgUrl} alt={station.name} />
+        <div className={styles.stationName}>{station.name}</div>
         </div>
     );
 }

@@ -4,10 +4,11 @@ import { useAppDispatch, useAppSelector } from './hooks'
 import { selectCurrentStation, fetchStations } from './store/stations/stationsSlice'
 import StationList from './components/StationList'
 import PlayBar from './components/PlayBar'
+import styles from './styles/App.module.css'
+import StationDetails from './components/StationDetails'
 
 const App: React.FC = () => {
 
-  
   const stationState = useAppSelector((state) => state.stations)
   const currentStation = useAppSelector(selectCurrentStation)
   const dispatch = useAppDispatch();
@@ -22,17 +23,12 @@ const App: React.FC = () => {
       {stationState.status === 'loading' && <div>Loading stations...</div>}
       {stationState.status === 'succeeded' && (
         <>
-        <div className="play-bar">
-          {currentStation ? (
-            <>
-            <p>Now Playing: {currentStation.name}</p>
-            </>
-          ) : (
-            <p>No Station Selected</p>            
-          )}
+        <div className={styles.appContainer}>
+        
+          {currentStation && <StationDetails station={currentStation} />}
+          <StationList/>
+          <PlayBar/>
         </div>
-        <StationList/>
-        <PlayBar/>
         </>
       )}
     </div>

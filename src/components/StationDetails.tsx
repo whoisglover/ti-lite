@@ -1,5 +1,6 @@
 import React from "react";
 import { Station as StationType } from "../types/station";
+import styles from "../styles/StationDetails.module.css";
 
 interface StationDetailsProps {
     station: StationType | null;
@@ -9,7 +10,7 @@ const StationDetails: React.FC<StationDetailsProps> = ({ station }) => {
     if(!station) return null;
 
     return (
-        <div>
+        <div className={styles.stationDetailsContainer}>
             <h1>{station.name}</h1>
             <img src={station.imgUrl} alt={station.name} />
             <p>{station.description}</p>

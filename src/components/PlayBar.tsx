@@ -1,13 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../hooks"
 import { selectAudioError, selectCurrentStation, selectAutoPlay, setAutoPlay } from "../store/stations/stationsSlice"
 import AudioPlayer from "./AudioPlayer"
-
+import styles from '../styles/PlayBar.module.css'
 
 
 const PlayBar: React.FC = () => {
     const currentStation = useAppSelector(selectCurrentStation)
     const audioError = useAppSelector(selectAudioError)
-
     const autoPlay = useAppSelector(selectAutoPlay)
     const dispatch = useAppDispatch();
 
@@ -16,18 +15,21 @@ const PlayBar: React.FC = () => {
     };
 
     return (
-        <div className="play-bar">
-            <button onClick={handlePlayStop}>
-                {autoPlay ? 'Stop' : 'Play'}
-            </button>
-            <div className="station-name">
-                {currentStation ? `Now Playing: ${currentStation.name}` : 'No Station Selected'}
-            </div>
-            <div className="audio-error">
-                {audioError && `Error: ${audioError}`}
-            </div>
-            {currentStation && <AudioPlayer streamUrl={currentStation.streamUrl} autoPlay={autoPlay} />}
+        <div className={styles.playBarContainer}>
+        <div className={styles.stationInfo}>
+            {audioError 
+                ? (
+                    <div className={styles.stationError}> {currentStation ? currentStation.name : 'Station'} has encountered an error</div>
+                )
+                : currentStation 
+                    ? `Now Playing: ${currentStation.name}` 
+                    : 'No Station Selected'}
         </div>
+        <button className={styles.playStopButton} onClick={handlePlayStop}>
+            {autoPlay ? '| |' : 'Play'}
+        </button>
+        {currentStation && <AudioPlayer streamUrl={currentStation.streamUrl} autoPlay={autoPlay} />}
+    </div>
     );
 }
 
