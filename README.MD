@@ -155,4 +155,4 @@ Learn more [here](https://react-redux.js.org/).
 - **Create Integration Tests**: In addition to unit tests, integration tests
   should be created to ensure the entire application works together as
   expected.  
-  ![Status](https://img.shields.io/badge/Status-To%20Do-yellow)
+  ![Status](https://img.shields.io/badge/Status-To%20Do-orange)
