@@ -41,7 +41,7 @@ const StationList: React.FC = () => {
 
   return (
     <div className={styles.stationListContainer}>
-      {/* {currentStation && <StationDetails station={currentStation} />} */}
+      <h2>Stations</h2>
       <div className={styles.sortOptions}>
         <label>
           <select
