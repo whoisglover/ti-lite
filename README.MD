@@ -145,12 +145,12 @@ Learn more [here](https://react-redux.js.org/).
 - **Sort by Tag**: Implement functionality to sort stations by tags, allowing
   users to more quickly find stations with specific attributes they're
   interested in.  
-  ![Status](https://img.shields.io/badge/Status-To%20Do-yellow)
+  ![Status](https://img.shields.io/badge/Status-Done-green)
 
 - **Expand Unit Test Coverage**: While basic tests are currently implemented,
   the test coverage can be expanded to cover more parts of the application,
   making it more reliable and maintainable.  
-  ![Status](https://img.shields.io/badge/Status-To%20Do-yellow)
+  ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
 
 - **Create Integration Tests**: In addition to unit tests, integration tests
   should be created to ensure the entire application works together as
