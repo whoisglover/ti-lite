@@ -44,6 +44,71 @@ Press 'O' in your terminal or visit `http://localhost:5173/`
 > Note: The port may be different on your machine, please reference the terminal
 > output.
 
+## Directory Structure
+```bash 
+├── README.md
+├── index.html
+├── jest.config.cjs
+├── jest.setup.ts
+├── package-lock.json
+├── package.json
+├── public
+│   └── vite.svg
+├── src
+│   ├── App.module.css
+│   ├── App.tsx
+│   ├── __mocks__
+│   │   └── styleMock.js
+│   ├── assets
+│   │   └── react.svg
+│   ├── components
+│   │   ├── AudioPlayer
+│   │   │   ├── __tests__
+│   │   │   │   └── index.test.tsx
+│   │   │   └── index.tsx
+│   │   ├── PlayBar
+│   │   │   ├── PlayBar.module.css
+│   │   │   ├── __tests__
+│   │   │   │   └── index.test.tsx
+│   │   │   └── index.tsx
+│   │   ├── Station
+│   │   │   ├── Station.module.css
+│   │   │   ├── __tests__
+│   │   │   │   └── index.test.tsx
+│   │   │   └── index.tsx
+│   │   ├── StationDetails
+│   │   │   ├── StationDetails.module.css
+│   │   │   ├── __tests__
+│   │   │   │   └── index.test.tsx
+│   │   │   └── index.tsx
+│   │   └── StationList
+│   │       ├── StationList.module.css
+│   │       ├── __tests__
+│   │       │   └── index.test.tsx
+│   │       └── index.tsx
+│   ├── hooks
+│   │   ├── __tests__
+│   │   └── index.ts
+│   ├── index.css
+│   ├── main.tsx
+│   ├── services
+│   │   ├── __tests__
+│   │   │   └── index.test.tsx
+│   │   └── api.ts
+│   ├── store
+│   │   ├── index.ts
+│   │   └── stations
+│   │       ├── __tests__
+│   │       │   └── index.test.tsx
+│   │       └── stationsSlice.ts
+│   ├── types
+│   │   └── station.ts
+│   └── vite-env.d.ts
+├── tsconfig.json
+├── tsconfig.node.json
+└── vite.config.ts
+```
+
 ## Technology Choices
 
 ### Vite
