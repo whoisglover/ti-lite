@@ -89,4 +89,32 @@ describe('StationList', () => {
       expect(stationList?.children[index]).toBe(station.parentElement)
     })
   })
+
+  it('filters stations correctly by tag', () => {
+    jest.spyOn(store, 'getState').mockImplementation(() => ({
+      stations: {
+        stations: mockStations,
+        currentStation: null,
+        audioError: null,
+        autoPlay: false,
+        status: 'succeeded',
+        error: null,
+      },
+    }))
+
+    const { getByText, queryByText, getByDisplayValue } = render(
+      <Provider store={store}>
+        <StationList />
+      </Provider>,
+    )
+
+    // Select the "tag1" from the dropdown
+    fireEvent.change(getByDisplayValue('All'), {
+      target: { value: 'tag1' },
+    })
+
+    // Check that only the station with the tag1 is displayed
+    expect(getByText('Test Station 1')).toBeInTheDocument()
+    expect(queryByText('Test Station 2')).toBeNull()
+  })
 })

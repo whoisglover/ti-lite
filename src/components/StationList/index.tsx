@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import Station from '../Station'
 import { Station as StationType } from '../../types/station'
 import {
@@ -15,10 +15,20 @@ const StationList: React.FC = () => {
   const currentStation = useAppSelector(selectCurrentStation)
 
   const [sortOption, setSortOption] = useState<string>('popularity-asc')
+  const [allTags, setAllTags] = useState<string[]>([])
+  const [selectedTag, setSelectedTag] = useState<string | null>(null)
 
   const sortStations = (stations: StationType[]): StationType[] => {
-    if (stations.length === 0) return []
-    return [...stations].sort((a, b) => {
+    let filteredStations = stations
+
+    if (selectedTag) {
+      filteredStations = filteredStations.filter(station =>
+        station.tags.includes(selectedTag),
+      )
+    }
+
+    if (filteredStations.length === 0) return []
+    return [...filteredStations].sort((a, b) => {
       switch (sortOption) {
         case 'popularity-asc':
           return a.popularity - b.popularity
@@ -34,9 +44,17 @@ const StationList: React.FC = () => {
     })
   }
 
+  useEffect(() => {
+    const tags = stations.reduce((acc: string[], station) => {
+      return [...acc, ...station.tags.filter(tag => !acc.includes(tag))]
+    }, [])
+
+    setAllTags(tags)
+  }, [stations])
+
   const sortedStations = useMemo(
     () => sortStations(stations),
-    [stations, sortOption],
+    [stations, sortOption, selectedTag],
   )
 
   return (
@@ -55,6 +73,22 @@ const StationList: React.FC = () => {
           </select>
         </label>
       </div>
+      <div className={styles.filterOptions}>
+        <label>
+          <select
+            value={selectedTag || ''}
+            onChange={e => setSelectedTag(e.target.value)}
+          >
+            <option value=''>All</option>
+            {allTags.map(tag => (
+              <option key={tag} value={tag}>
+                {tag}
+              </option>
+            ))}
+          </select>
+        </label>
+      </div>
+
       <div className={styles.stationGrid}>
         {sortedStations.map(station => (
           <Station
